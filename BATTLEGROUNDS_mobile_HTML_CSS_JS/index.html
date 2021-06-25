@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Battlegrounds | Vanilla Javascript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <audio id="audio" src="img/sound.wav" autostart="false"></audio>
+    </section>
+
+    <script>
+        document.addEventListener('click', function(e){
+            let body = document.querySelector('body');
+            let bullet = document.createElement('span');
+            bullet.classList.add('bullet');
+            let x = e.offsetX;
+            let y = e.offsetY;
+            bullet.style.left = x+'px';
+            bullet.style.top = y+'px';
+            body.appendChild(bullet);
+
+            //add som de balas ao clicar
+            let sound = document.getElementById('audio');
+            sound.play();
+
+            //aparecer sangue na tela após clique
+
+            //add imagens de sangue aleatório
+            let images = [
+                'url("img/blood1.png")',
+                'url("img/blood2.png")',
+                'url("img/blood3.png")',
+                'url("img/blood4.png")',
+            ];
+            let blood = document.createElement('span');
+            blood.classList.add('blood');
+
+            let bg = images[Math.floor(Math.random() * images.length)];
+            blood.style.backgroundImage = bg;
+
+            blood.style.left = Math.random() * innerWidth + 'px';
+            blood.style.top = Math.random() * innerHeight + 'px';
+            body.appendChild(blood);
+
+            //remover balas e sangue após 4 segundos
+            setTimeout(function(){
+                bullet.remove();
+                blood.remove();
+            },4000);
+        })
+
+    </script>
+    
+</body>
+</html>
